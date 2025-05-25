@@ -1,8 +1,8 @@
-This is a Modified version of [url=https://steamcommunity.com/workshop/filedetails/?id=2572385719] Kitsune's Crossbow Mod[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2844721214]Remastered Kitsune's Crossbow Mod (Sound Fix)[/url].
+This is a Modified version of Kitsune's Crossbow Mod and Remastered Kitsune's Crossbow Mod (Sound Fix).
 
-If you have [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2847408431&searchtext=Coavins+Firearm+Repair]Coavins Firearm Repair[/url] installed and want to use [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2844721214]Remastered Kitsune's Crossbow Mod (Sound Fix)[/url], you need this fix because some weapons will fire two bullets.
+If you have Coavins Firearm Repair installed and want to use Remastered Kitsune's Crossbow Mod (Sound Fix), you need this fix because some weapons will fire two bullets.
 
-[h1]Use only one mod.[/h1]
+Use only one mod.
 
 Workshop ID: 2902013458
 Mod ID: KitsuneCrossbowSoundFix+DoubleshotatatimeFix
