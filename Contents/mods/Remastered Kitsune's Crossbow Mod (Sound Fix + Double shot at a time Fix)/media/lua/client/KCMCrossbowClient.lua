@@ -173,7 +173,8 @@ end
 
 Hook.Attack.Remove(ISReloadWeaponAction.attackHook);
 local original_attackHook = ISReloadWeaponAction.attackHook
-
+-- can we attack?
+-- need a chambered round
 ISReloadWeaponAction.attackHook = function(character, chargeDelta, weapon)
     if weapon:getType() == "HandCrossbow" or weapon:getType() == "KCM_Compound" or weapon:getType() == "KCM_Compound02" or weapon:getType() == "KCM_Handmade" or weapon:getType() == "KCM_Handmade02" then
         ISTimedActionQueue.clear(character)
@@ -203,20 +204,22 @@ end
 
 Events.OnWeaponSwingHitPoint.Remove(ISReloadWeaponAction.onShoot);
 local original_onShoot = ISReloadWeaponAction.onShoot
-
+-- shoot shoot bang bang
+-- handle ammo removal, new chamber & jam chance
 ISReloadWeaponAction.onShoot = function(player, weapon)
     if not weapon:isRanged() then return end
     if weapon:getType() == "HandCrossbow" or weapon:getType() == "KCM_Compound" or weapon:getType() == "KCM_Compound02" or weapon:getType() == "KCM_Handmade" or weapon:getType() == "KCM_Handmade02" then
         if weapon:haveChamber() then
             weapon:setRoundChambered(false);
         end
+        -- remove ammo, add one to chamber if we still have some
         if weapon:getCurrentAmmoCount() >= weapon:getAmmoPerShoot() then
             if weapon:haveChamber() then
                 weapon:setRoundChambered(true);
             end
             weapon:setCurrentAmmoCount(weapon:getCurrentAmmoCount() - weapon:getAmmoPerShoot());
         end
-        if weapon:isRackAfterShoot() then
+        if weapon:isRackAfterShoot() then -- shotgun need to be rack after each shot to rechamber round
             player:setVariable("RackWeapon", weapon:getWeaponReloadType());
         end
         if weapon:getType() == "HandCrossbow" then weapon:setWeaponSprite("KCMweapons.HandCrossbow"); end
@@ -233,9 +236,10 @@ end
 
 Events.OnPressRackButton.Remove(ISReloadWeaponAction.OnPressRackButton);
 local original_OnPressRackButton = ISReloadWeaponAction.OnPressRackButton
-
+-- Called when pressing rack (if you rack while having a clip/bullets, we simply remove it and don't reload a new one)
 ISReloadWeaponAction.OnPressRackButton = function(player, gun)
     if gun:getType() == "HandCrossbow" or gun:getType() == "KCM_Compound" or gun:getType() == "KCM_Compound02" or gun:getType() == "KCM_Handmade" or gun:getType() == "KCM_Handmade02" then
+        -- if you press rack while loading bullets, we stop and rack
         if player:getVariableBoolean("isLoading") and not gun:isRoundChambered() then
             ISTimedActionQueue.clear(player);
         end
